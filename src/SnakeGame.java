@@ -1,16 +1,18 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class SnakeGame extends JFrame {
+
+    private GamePanel gamePanel = new GamePanel();
 
     public SnakeGame() {
         setTitle("Snake");
         setSize(900, 900);
-
-        this.setResizable(false);
-        this.setVisible(true);
-
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(gamePanel);
+        setResizable(false);
+        setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {
