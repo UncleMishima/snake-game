@@ -1,12 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
 
     private Snake snake = new Snake();
+    private Timer snakeTimer;
 
     public GamePanel() {
         setBackground(Color.DARK_GRAY);
+        snakeTimer = new Timer(200, this);
+        snakeTimer.start();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        snake.update();
+        repaint();
     }
 
     @Override
