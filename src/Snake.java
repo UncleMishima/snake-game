@@ -15,7 +15,15 @@ public class Snake {
 
     private void initSnakeArray() {
         for (int i = 0; i < snakeSize; i++) {
-            snake.add(new Point(0, i));
+            snake.add(new Point(10, i + 10));
+        }
+    }
+
+    public void update() {
+        for (int i = 0; i < snakeSize; i++) {
+            Point currentPiece = snake.get(i);
+            currentPiece.y++;
+            snake.set(i, currentPiece);
         }
     }
 
