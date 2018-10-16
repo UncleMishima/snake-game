@@ -3,6 +3,8 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
 
+    private Snake snake = new Snake();
+
     public GamePanel() {
         setBackground(Color.DARK_GRAY);
     }
@@ -11,6 +13,7 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawGrid(g);
+        snake.drawSnake(g);
     }
 
     private void drawGrid(Graphics g) {
