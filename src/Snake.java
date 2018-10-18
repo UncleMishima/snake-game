@@ -25,26 +25,36 @@ public class Snake {
     }
 
     public void update() {
-        for (int i = 0; i < snakeSize; i++) {
-            Point currentPiece = snake.get(i);
+        
+        Point firstPiece = snake.get(0);
 
-            switch(snakeDirection) {
+        for (int i = snakeSize - 1; i >= 1; --i) {
+            Point currentPiece = new Point(snake.get(i - 1));
+            snake.set(i, currentPiece);
+        }
+
+            switch (snakeDirection) {
                 case UP:
-                    currentPiece.y--;
+                    firstPiece.y--;
                     break;
                 case DOWN:
-                    currentPiece.y++;
+                    firstPiece.y++;
                     break;
                 case LEFT:
-                    currentPiece.x--;
+                    firstPiece.x--;
                     break;
                 case RIGHT:
-                    currentPiece.x++;
+                    firstPiece.x++;
                     break;
             }
 
-            snake.set(i, currentPiece);
+        snake.set(0, firstPiece);
+
+        for (Point point : snake) {
+            System.out.println(point + " ");
         }
+        System.out.println(snake.size());
+        System.out.println();
     }
 
     public void drawSnake(Graphics g) {
