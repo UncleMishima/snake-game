@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 
 public class Snake {
@@ -35,8 +34,9 @@ public class Snake {
         Point firstPiece = snake.get(0);
 
         for (int i = snakeSize - 1; i >= 1; --i) {
-            Point currentPiece = new Point(snake.get(i - 1));
-            snake.set(i, currentPiece);
+            Point currentPiece = snake.get(i - 1);
+            snake.get(i).x = currentPiece.x;
+            snake.get(i).y = currentPiece.y;
         }
 
         if (snakePreviousDirection == SnakeDirection.UP && snakeDirection == SnakeDirection.DOWN ||
@@ -83,18 +83,19 @@ public class Snake {
     }
 
     public void drawSnake(Graphics g) {
+        int cellSize = GamePanel.CELL_SIZE;
         g.setColor(snakeColor);
         for (int i = 0; i < snakeSize; i++) {
             int snakeX = snake.get(i).x;
             int snakeY = snake.get(i).y;
-            g.fillRect(snakeX * 25, snakeY * 25, 25, 25);
+            g.fillRect(snakeX * cellSize, snakeY * cellSize, cellSize, cellSize);
         }
 
         g.setColor(Color.BLACK);
         for (int i = 0; i < snakeSize; i++) {
             int snakeX = snake.get(i).x;
             int snakeY = snake.get(i).y;
-            g.drawRect(snakeX * 25, snakeY * 25, 25, 25);
+            g.drawRect(snakeX * cellSize, snakeY * cellSize, cellSize, cellSize);
         }
     }
 
