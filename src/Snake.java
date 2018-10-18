@@ -7,14 +7,15 @@ public class Snake {
 
     private ArrayList<Point> snake = new ArrayList<>();
     private Color snakeColor;
-    private int snakeSize;
+    private int snakeSize = SNAKE_START_SIZE;
     private SnakeDirection snakeDirection;
 
     public Snake() {
-        initSnakeArray();
         snakeColor = Color.GREEN;
         snakeSize = SNAKE_START_SIZE;
         snakeDirection = SnakeDirection.UP;
+
+        initSnakeArray();
     }
 
     private void initSnakeArray() {
@@ -26,7 +27,22 @@ public class Snake {
     public void update() {
         for (int i = 0; i < snakeSize; i++) {
             Point currentPiece = snake.get(i);
-            currentPiece.y++;
+
+            switch(snakeDirection) {
+                case UP:
+                    currentPiece.y--;
+                    break;
+                case DOWN:
+                    currentPiece.y++;
+                    break;
+                case LEFT:
+                    currentPiece.x--;
+                    break;
+                case RIGHT:
+                    currentPiece.x++;
+                    break;
+            }
+
             snake.set(i, currentPiece);
         }
     }
@@ -45,6 +61,10 @@ public class Snake {
             int snakeY = snake.get(i).y;
             g.drawRect(snakeX * 25, snakeY * 25, 25, 25);
         }
+    }
+
+    public void setSnakeDirection(SnakeDirection snakeDirection) {
+        this.snakeDirection = snakeDirection;
     }
 }
 
