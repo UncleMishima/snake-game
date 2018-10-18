@@ -8,6 +8,7 @@ public class SnakeGame extends JFrame {
         setTitle("Snake");
         setSize(917, 915);
         setContentPane(gamePanel);
+        addKeyListener(gamePanel);
         setResizable(false);
         setVisible(true);
         setLocationRelativeTo(null);
