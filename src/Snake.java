@@ -9,11 +9,13 @@ public class Snake {
     private Color snakeColor;
     private int snakeSize;
     private SnakeDirection snakeDirection;
+    private SnakeDirection snakePreviousDirection;
 
     public Snake() {
         snakeColor = Color.GREEN;
         snakeSize = SNAKE_START_SIZE;
         snakeDirection = SnakeDirection.UP;
+        snakePreviousDirection = snakeDirection;
 
         initSnakeArray();
     }
@@ -35,6 +37,13 @@ public class Snake {
         for (int i = snakeSize - 1; i >= 1; --i) {
             Point currentPiece = new Point(snake.get(i - 1));
             snake.set(i, currentPiece);
+        }
+
+        if (snakePreviousDirection == SnakeDirection.UP && snakeDirection == SnakeDirection.DOWN ||
+                snakePreviousDirection == SnakeDirection.DOWN && snakeDirection == SnakeDirection.UP ||
+                snakePreviousDirection == SnakeDirection.RIGHT && snakeDirection == SnakeDirection.LEFT ||
+                snakePreviousDirection == SnakeDirection.LEFT && snakeDirection == SnakeDirection.RIGHT) {
+            snakeDirection = snakePreviousDirection;
         }
 
         switch (snakeDirection) {
@@ -90,6 +99,7 @@ public class Snake {
     }
 
     public void setSnakeDirection(SnakeDirection snakeDirection) {
+        this.snakePreviousDirection = this.snakeDirection;
         this.snakeDirection = snakeDirection;
     }
 }
