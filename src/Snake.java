@@ -7,7 +7,7 @@ public class Snake {
 
     private ArrayList<Point> snake = new ArrayList<>();
     private Color snakeColor;
-    private int snakeSize = SNAKE_START_SIZE;
+    private int snakeSize;
     private SnakeDirection snakeDirection;
 
     public Snake() {
@@ -25,7 +25,11 @@ public class Snake {
     }
 
     public void update() {
-        
+        snakeMove();
+        snakeMoveBorders();
+    }
+
+    private void snakeMove() {
         Point firstPiece = snake.get(0);
 
         for (int i = snakeSize - 1; i >= 1; --i) {
@@ -33,28 +37,40 @@ public class Snake {
             snake.set(i, currentPiece);
         }
 
-            switch (snakeDirection) {
-                case UP:
-                    firstPiece.y--;
-                    break;
-                case DOWN:
-                    firstPiece.y++;
-                    break;
-                case LEFT:
-                    firstPiece.x--;
-                    break;
-                case RIGHT:
-                    firstPiece.x++;
-                    break;
-            }
+        switch (snakeDirection) {
+            case UP:
+                firstPiece.y--;
+                break;
+            case DOWN:
+                firstPiece.y++;
+                break;
+            case LEFT:
+                firstPiece.x--;
+                break;
+            case RIGHT:
+                firstPiece.x++;
+                break;
+        }
 
         snake.set(0, firstPiece);
+    }
 
-        for (Point point : snake) {
-            System.out.println(point + " ");
+    private void snakeMoveBorders() {
+        int maxWidth = SnakeGame.WINDOW_WIDTH / GamePanel.CELL_SIZE;
+        int maxHeight = SnakeGame.WINDOW_HEIGHT / GamePanel.CELL_SIZE;
+        Point snakeHead = snake.get(0);
+
+        if (snakeHead.y > maxHeight) {
+            snakeHead.y = 0;
+        } else if (snakeHead.y < 0) {
+            snakeHead.y = maxHeight;
         }
-        System.out.println(snake.size());
-        System.out.println();
+
+        if (snakeHead.x > maxWidth) {
+            snakeHead.x = 0;
+        } else if (snakeHead.x < 0) {
+            snakeHead.x = maxWidth;
+        }
     }
 
     public void drawSnake(Graphics g) {

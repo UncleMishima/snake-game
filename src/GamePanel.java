@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
+    public static final int CELL_SIZE = 25;
 
     private Snake snake = new Snake();
     private Timer snakeTimer;
@@ -60,11 +61,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     private void drawGrid(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
 
-        for (int i = 0; i <= getWidth(); i += 25) {
+        for (int i = 0; i <= getWidth(); i += CELL_SIZE) {
             g.drawLine(i, getHeight(), i, 0);
         }
 
-        for (int i = 0; i <= getHeight(); i += 25) {
+        for (int i = 0; i <= getHeight(); i += CELL_SIZE) {
             g.drawLine(getWidth(), i, 0, i);
         }
     }

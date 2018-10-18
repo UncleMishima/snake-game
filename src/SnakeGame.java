@@ -1,12 +1,14 @@
 import javax.swing.*;
 
 public class SnakeGame extends JFrame {
+    public static final int WINDOW_WIDTH = GamePanel.CELL_SIZE * 36 + 17;
+    public static final int WINDOW_HEIGHT = GamePanel.CELL_SIZE * 36 + 15;
 
     private GamePanel gamePanel = new GamePanel();
 
     public SnakeGame() {
         setTitle("Snake");
-        setSize(917, 915);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setContentPane(gamePanel);
         addKeyListener(gamePanel);
         setResizable(false);
