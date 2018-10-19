@@ -9,6 +9,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public static final int CELL_SIZE = 25;
 
     private Snake snake = new Snake();
+    private Fruit fruit = new Fruit(5, 5, Color.YELLOW);
     private Timer snakeTimer;
 
     public GamePanel() {
@@ -54,8 +55,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGrid(g);
+        //drawGrid(g);
         snake.drawSnake(g);
+        fruit.drawFruit(g);
     }
 
     private void drawGrid(Graphics g) {
