@@ -9,7 +9,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public static final int CELL_SIZE = 25;
 
     private Snake snake = new Snake();
-    private Fruit fruit = new Fruit(5, 5, Color.YELLOW);
+    private Fruit fruit = new Fruit();
     private Timer snakeTimer;
 
     public GamePanel() {
@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         Point snakeHead = snake.getSnake().get(0);
 
         if (snakeHead.x == fruitX && snakeHead.y == fruitY) {
+            snake.getSnake().add(new Point());
             fruit = new Fruit();
         }
     }
