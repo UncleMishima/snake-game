@@ -5,8 +5,7 @@ public class Fruit {
     private Color fruitColor;
 
     public Fruit() {
-        fruitX = fruitY = 0;
-        fruitColor = Color.YELLOW;
+        this(0, 0, Color.YELLOW);
     }
 
     public Fruit(int fruitX, int fruitY, Color fruitColor) {
@@ -22,5 +21,13 @@ public class Fruit {
 
         g.setColor(Color.BLACK);
         g.drawRect(fruitX * cellSize, fruitY * cellSize, cellSize, cellSize);
+    }
+
+    public int getFruitX() {
+        return fruitX;
+    }
+
+    public int getFruitY() {
+        return fruitY;
     }
 }

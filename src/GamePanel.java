@@ -21,7 +21,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         snake.update();
+        checkSnakeEatFruit();
         repaint();
+    }
+
+    public void checkSnakeEatFruit() {
+        int fruitX = fruit.getFruitX();
+        int fruitY = fruit.getFruitY();
+        Point snakeHead = snake.getSnake().get(0);
+
+        if (snakeHead.x == fruitX && snakeHead.y == fruitY) {
+            fruit = new Fruit();
+        }
     }
 
     @Override
@@ -56,8 +67,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         //drawGrid(g);
-        snake.drawSnake(g);
         fruit.drawFruit(g);
+        snake.drawSnake(g);
     }
 
     private void drawGrid(Graphics g) {

@@ -28,11 +28,20 @@ public class Snake {
     public void update() {
         snakeMove();
         snakeMoveBorders();
+        checkSnakeCollision();
+    }
+
+    private void checkSnakeCollision() {
+        Point snakeHead = snake.get(0);
+        for (int i = snakeSize - 1; i > 0; i--) {
+            if (snakeHead.x == snake.get(i).x && snakeHead.y == snake.get(i).y) {
+                //game over
+            }
+        }
     }
 
     private void snakeMove() {
         Point firstPiece = snake.get(0);
-
         for (int i = snakeSize - 1; i >= 1; --i) {
             Point currentPiece = snake.get(i - 1);
             snake.get(i).x = currentPiece.x;
@@ -102,6 +111,10 @@ public class Snake {
     public void setSnakeDirection(SnakeDirection snakeDirection) {
         this.snakePreviousDirection = this.snakeDirection;
         this.snakeDirection = snakeDirection;
+    }
+
+    public ArrayList<Point> getSnake() {
+        return snake;
     }
 }
 
