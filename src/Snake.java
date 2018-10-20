@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Snake {
     public static final int SNAKE_START_SIZE = 4;
 
-    private ArrayList<Point> snake = new ArrayList<>();
+    private ArrayList<Point> snake;
     private Color snakeColor;
     private SnakeDirection snakeDirection;
     private SnakeDirection snakePreviousDirection;
@@ -13,7 +13,6 @@ public class Snake {
         snakeColor = Color.GREEN;
         snakeDirection = SnakeDirection.UP;
         snakePreviousDirection = snakeDirection;
-
         initSnakeArray();
     }
 
@@ -38,16 +37,18 @@ public class Snake {
     }
 
     private void initSnakeArray() {
+        snake = new ArrayList<>();
         for (int i = 0; i < SNAKE_START_SIZE; i++) {
-            snake.add(new Point(10, i + 10));
+            Point newPoint = new Point(10, i + 10);
+            snake.add(newPoint);
         }
     }
 
     private void checkSnakeCollision() {
         Point snakeHead = snake.get(0);
-        for (int i = snake.size() - 1; i > 0; i--) {
+        for (int i = 1; i < snake.size(); i++) {
             if (snakeHead.x == snake.get(i).x && snakeHead.y == snake.get(i).y) {
-                //game over
+                initSnakeArray();
             }
         }
     }
@@ -59,6 +60,8 @@ public class Snake {
             snake.get(i).x = currentPiece.x;
             snake.get(i).y = currentPiece.y;
         }
+
+        //System.out.println(snake);
 
         if (snakePreviousDirection == SnakeDirection.UP && snakeDirection == SnakeDirection.DOWN ||
                 snakePreviousDirection == SnakeDirection.DOWN && snakeDirection == SnakeDirection.UP ||
@@ -90,13 +93,13 @@ public class Snake {
         int maxHeight = SnakeGame.WINDOW_HEIGHT / GamePanel.CELL_SIZE;
         Point snakeHead = snake.get(0);
 
-        if (snakeHead.y > maxHeight) {
+        if (snakeHead.y == maxHeight) {
             snakeHead.y = 0;
         } else if (snakeHead.y < 0) {
             snakeHead.y = maxHeight;
         }
 
-        if (snakeHead.x > maxWidth) {
+        if (snakeHead.x == maxWidth) {
             snakeHead.x = 0;
         } else if (snakeHead.x < 0) {
             snakeHead.x = maxWidth;
