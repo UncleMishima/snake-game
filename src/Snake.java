@@ -6,13 +6,11 @@ public class Snake {
 
     private ArrayList<Point> snake = new ArrayList<>();
     private Color snakeColor;
-    private int snakeSize;
     private SnakeDirection snakeDirection;
     private SnakeDirection snakePreviousDirection;
 
     public Snake() {
         snakeColor = Color.GREEN;
-        snakeSize = SNAKE_START_SIZE;
         snakeDirection = SnakeDirection.UP;
         snakePreviousDirection = snakeDirection;
 
@@ -20,7 +18,7 @@ public class Snake {
     }
 
     private void initSnakeArray() {
-        for (int i = 0; i < snakeSize; i++) {
+        for (int i = 0; i < SNAKE_START_SIZE; i++) {
             snake.add(new Point(10, i + 10));
         }
     }
@@ -33,7 +31,7 @@ public class Snake {
 
     private void checkSnakeCollision() {
         Point snakeHead = snake.get(0);
-        for (int i = snakeSize - 1; i > 0; i--) {
+        for (int i = snake.size() - 1; i > 0; i--) {
             if (snakeHead.x == snake.get(i).x && snakeHead.y == snake.get(i).y) {
                 //game over
             }
@@ -42,7 +40,7 @@ public class Snake {
 
     private void snakeMove() {
         Point firstPiece = snake.get(0);
-        for (int i = snakeSize - 1; i >= 1; --i) {
+        for (int i = snake.size() - 1; i >= 1; --i) {
             Point currentPiece = snake.get(i - 1);
             snake.get(i).x = currentPiece.x;
             snake.get(i).y = currentPiece.y;
@@ -94,14 +92,14 @@ public class Snake {
     public void drawSnake(Graphics g) {
         int cellSize = GamePanel.CELL_SIZE;
         g.setColor(snakeColor);
-        for (int i = 0; i < snakeSize; i++) {
+        for (int i = 0; i < snake.size(); i++) {
             int snakeX = snake.get(i).x;
             int snakeY = snake.get(i).y;
             g.fillRect(snakeX * cellSize, snakeY * cellSize, cellSize, cellSize);
         }
 
         g.setColor(Color.BLACK);
-        for (int i = 0; i < snakeSize; i++) {
+        for (int i = 0; i < snake.size(); i++) {
             int snakeX = snake.get(i).x;
             int snakeY = snake.get(i).y;
             g.drawRect(snakeX * cellSize, snakeY * cellSize, cellSize, cellSize);
@@ -115,6 +113,10 @@ public class Snake {
 
     public ArrayList<Point> getSnake() {
         return snake;
+    }
+
+    public void setSnake(ArrayList<Point> snake) {
+        this.snake = snake;
     }
 }
 
