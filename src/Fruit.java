@@ -6,9 +6,7 @@ public class Fruit {
     private Color fruitColor;
 
     public Fruit() {
-        fruitColor = Color.YELLOW;
-        generateFruitPosition();
-        //this(0, 0, Color.YELLOW);
+        this(0, 0, Color.YELLOW);
     }
 
     public Fruit(int fruitX, int fruitY, Color fruitColor) {

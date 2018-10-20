@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public static final int CELL_SIZE = 25;
@@ -23,24 +22,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         snake.update();
-        checkSnakeEatFruit();
-        repaint();
-    }
-
-    public void checkSnakeEatFruit() {
-        int fruitX = fruit.getFruitX();
-        int fruitY = fruit.getFruitY();
-        ArrayList<Point> snakeArray = snake.getSnake();
-        Point snakeHead = snakeArray.get(0);
-
-        if (snakeHead.x == fruitX && snakeHead.y == fruitY) {
-            Point addNewPoint = new Point(snakeArray.get(snakeArray.size() - 1));
-            addNewPoint.y--;
-            snake.getSnake().add(addNewPoint);
+        if (snake.checkSnakeEatFruit(fruit)) {
             fruit = new Fruit();
         }
-
-        snake.setSnake(snakeArray);
         repaint();
     }
 

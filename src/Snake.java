@@ -17,16 +17,30 @@ public class Snake {
         initSnakeArray();
     }
 
-    private void initSnakeArray() {
-        for (int i = 0; i < SNAKE_START_SIZE; i++) {
-            snake.add(new Point(10, i + 10));
-        }
-    }
-
     public void update() {
         snakeMove();
         snakeMoveBorders();
         checkSnakeCollision();
+    }
+
+    public boolean checkSnakeEatFruit(Fruit fruit) {
+        int fruitX = fruit.getFruitX();
+        int fruitY = fruit.getFruitY();
+        Point snakeHead = snake.get(0);
+
+        if (snakeHead.x == fruitX && snakeHead.y == fruitY) {
+            Point addNewPoint = new Point(snake.get(snake.size() - 1));
+            snake.add(addNewPoint);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void initSnakeArray() {
+        for (int i = 0; i < SNAKE_START_SIZE; i++) {
+            snake.add(new Point(10, i + 10));
+        }
     }
 
     private void checkSnakeCollision() {
