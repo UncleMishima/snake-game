@@ -7,22 +7,37 @@ import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public static final int CELL_SIZE = 25;
+    public static final int POINTS_PER_FRUIT = 50;
     private Snake snake;
     private Fruit fruit;
+    private int gameScore;
     private Timer snakeTimer;
+    private JLabel scoreLabel;
 
     public GamePanel() {
         setBackground(Color.DARK_GRAY);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         snake = new Snake();
         fruit = new Fruit();
+        gameScore = 0;
         snakeTimer = new Timer(200, this);
         snakeTimer.start();
+        addScoreLabel();
+    }
+
+    private void addScoreLabel() {
+        scoreLabel = new JLabel("SCORE: " + String.valueOf(gameScore));
+        add(scoreLabel);
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setFont(new Font(scoreLabel.getName(), Font.PLAIN, 15));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         snake.update();
         if (snake.checkSnakeEatFruit(fruit)) {
+            gameScore += POINTS_PER_FRUIT;
+            scoreLabel.setText("SCORE: " + String.valueOf(gameScore));
             fruit = new Fruit();
         }
         repaint();
