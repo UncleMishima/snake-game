@@ -1,7 +1,7 @@
-import javax.swing.*;
+import javax.swing.JFrame;
 
 /**
- * The <code>GameWindow</code> class represents a
+ * The GameWindow class represents a
  * window for snake game.
  *
  * @author Mikhail Sedov
@@ -41,7 +41,7 @@ public class GameWindow extends JFrame {
     }
 
     /**
-     * Creates <code>GameWindow</> object and runs the snake game application.
+     * Creates GameWindow object and runs the snake game application.
      * @param args
      */
     public static void main(String[] args) {
