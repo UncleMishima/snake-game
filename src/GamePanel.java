@@ -5,15 +5,49 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * The GamePanel class represents a game map for the snake game.
+ * It implements ActionListener and KeyListener interfaces.
+ */
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
+    /**
+     * Cell size constant value.
+     */
     public static final int CELL_SIZE = 25;
+
+    /**
+     * After eating a fruit by snake the game score increases on this constant value.
+     */
     public static final int POINTS_PER_FRUIT = 50;
+
+    /**
+     * The Snake.
+     */
     private Snake snake;
+
+    /**
+     * The Fruit.
+     */
     private Fruit fruit;
+
+    /**
+     * Game score.
+     */
     private int gameScore;
+
+    /**
+     * Set snake move speed.
+     */
     private Timer snakeTimer;
+
+    /**
+     * The score label.
+     */
     private JLabel scoreLabel;
 
+    /**
+     * Initializes fields and set GamePanel components.
+     */
     public GamePanel() {
         setBackground(Color.DARK_GRAY);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -25,6 +59,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         addScoreLabel();
     }
 
+    /**
+     * Adds the score label on the game panel.
+     */
     private void addScoreLabel() {
         scoreLabel = new JLabel("SCORE: " + String.valueOf(gameScore));
         add(scoreLabel);
@@ -32,6 +69,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         scoreLabel.setFont(new Font(scoreLabel.getName(), Font.PLAIN, 15));
     }
 
+    /**
+     * Updates every move on the game panel.
+     * @param e is ActionEvent parameter
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         snake.update();
@@ -43,6 +84,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         repaint();
     }
 
+    /**
+     * Changes snake direction depending on pressed key.
+     * @param e KeyEvent parameter
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
@@ -61,16 +106,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         }
     }
 
+    /**
+     * Unused. Declares because of KeyListener interface.
+     */
     @Override
     public void keyReleased(KeyEvent e) {
 
     }
 
+    /**
+     * Unused. Declares because of KeyListener interface.
+     */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
+    /**
+     * Overrides JPanel paintComponent function for
+     * changing background and drawing snake and fruit.
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -79,6 +134,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         snake.drawSnake(g);
     }
 
+    /**
+     * Draw a grid on the game panel.
+     */
     private void drawGrid(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
 

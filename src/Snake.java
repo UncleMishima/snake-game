@@ -1,14 +1,42 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
+/**
+ * The Snake class describes a snake.
+ *
+ * @author Mikhail Sedov
+ */
 public class Snake {
+    /**
+     * Constant value of the snake start size.
+     */
     public static final int SNAKE_START_SIZE = 4;
 
+    /**
+     * Snake array. Every piece of snake is a Point.
+     */
     private ArrayList<Point> snake;
+
+    /**
+     * Snake color.
+     */
     private Color snakeColor;
+
+    /**
+     * Snake main direction.
+     */
     private SnakeDirection snakeDirection;
+
+    /**
+     * Snake previous direction for calculation new (main) direction.
+     */
     private SnakeDirection snakePreviousDirection;
 
+    /**
+     * Initializing fields and invokes initSnakeArray function.
+     */
     public Snake() {
         snakeColor = Color.GREEN;
         snakeDirection = SnakeDirection.UP;
@@ -16,12 +44,22 @@ public class Snake {
         initSnakeArray();
     }
 
+    /**
+     * Updates snake movements and actions.
+     */
     public void update() {
         snakeMove();
         snakeMoveBorders();
         checkSnakeCollision();
     }
 
+    /**
+     * Checks snake eating a fruit.
+     *
+     * @param fruit is a point which snake need to eat
+     * @return true if snake ate a fruit and
+     * return false if not
+     */
     public boolean checkSnakeEatFruit(Fruit fruit) {
         int fruitX = fruit.getFruitX();
         int fruitY = fruit.getFruitY();
@@ -36,6 +74,9 @@ public class Snake {
         return false;
     }
 
+    /**
+     * Initializes snake array.
+     */
     private void initSnakeArray() {
         snake = new ArrayList<>();
         for (int i = 0; i < SNAKE_START_SIZE; i++) {
@@ -44,6 +85,9 @@ public class Snake {
         }
     }
 
+    /**
+     * Checks snake collisions with its tail.
+     */
     private void checkSnakeCollision() {
         Point snakeHead = snake.get(0);
         for (int i = 1; i < snake.size(); i++) {
@@ -53,6 +97,9 @@ public class Snake {
         }
     }
 
+    /**
+     * Describes snake move.
+     */
     private void snakeMove() {
         Point firstPiece = snake.get(0);
         for (int i = snake.size() - 1; i >= 1; --i) {
@@ -60,8 +107,6 @@ public class Snake {
             snake.get(i).x = currentPiece.x;
             snake.get(i).y = currentPiece.y;
         }
-
-        //System.out.println(snake);
 
         if (snakePreviousDirection == SnakeDirection.UP && snakeDirection == SnakeDirection.DOWN ||
                 snakePreviousDirection == SnakeDirection.DOWN && snakeDirection == SnakeDirection.UP ||
@@ -88,9 +133,12 @@ public class Snake {
         snake.set(0, firstPiece);
     }
 
+    /**
+     * Sets snake move borders.
+     */
     private void snakeMoveBorders() {
-        int maxWidth = SnakeGame.WINDOW_WIDTH / GamePanel.CELL_SIZE;
-        int maxHeight = SnakeGame.WINDOW_HEIGHT / GamePanel.CELL_SIZE;
+        int maxWidth = GameWindow.WINDOW_WIDTH / GamePanel.CELL_SIZE;
+        int maxHeight = GameWindow.WINDOW_HEIGHT / GamePanel.CELL_SIZE;
         Point snakeHead = snake.get(0);
 
         if (snakeHead.y == maxHeight) {
@@ -106,6 +154,9 @@ public class Snake {
         }
     }
 
+    /**
+     * Draws a snake.
+     */
     public void drawSnake(Graphics g) {
         int cellSize = GamePanel.CELL_SIZE;
         g.setColor(snakeColor);
@@ -123,20 +174,21 @@ public class Snake {
         }
     }
 
+    /**
+     * Setter for snakeDirection.
+     *
+     * @param snakeDirection is a new direction for snake
+     */
     public void setSnakeDirection(SnakeDirection snakeDirection) {
         this.snakePreviousDirection = this.snakeDirection;
         this.snakeDirection = snakeDirection;
     }
-
-    public ArrayList<Point> getSnake() {
-        return snake;
-    }
-
-    public void setSnake(ArrayList<Point> snake) {
-        this.snake = snake;
-    }
 }
 
+/**
+ * SnakeDirection is enumeration which
+ * describes snake direction.
+ */
 enum SnakeDirection {
     UP (0),
     DOWN (1),

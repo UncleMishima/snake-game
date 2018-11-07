@@ -6,7 +6,6 @@ import javax.swing.JFrame;
  *
  * @author Mikhail Sedov
  */
-
 public class GameWindow extends JFrame {
     /**
      * The constant width value for snake game window.
@@ -25,7 +24,7 @@ public class GameWindow extends JFrame {
 
     /**
      * Initializing gamePanel field and set
-     * other values of the snake game window
+     * other values of the snake game window.
      */
     public GameWindow() {
         gamePanel = new GamePanel();
